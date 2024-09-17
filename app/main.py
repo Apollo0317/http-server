@@ -28,7 +28,7 @@ def main():
     #form response header
     headers=bytes(f'Content-Type: text/plain\r\nContent-Length:{Content_length}\r\n\r\n',encoding='utf-8')
     #form response body
-    body=bytes(f'{target_path}',encoding='utf-8')
+    body=bytes(f'{target_path[5:]}',encoding='utf-8')
     response+=status
     response+=headers
     response+=body

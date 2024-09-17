@@ -18,7 +18,7 @@ def main():
     target_path=request_line[1]
     Content_length=len(target_path)-6
     request_header=data_list[1]
-    if target_path!='/' and target_path[:3]!=r'/echo':
+    if target_path!='/' and target_path[:5]!=r'/echo':
         code=404
         status_describe='Not Found'
     #start forming response

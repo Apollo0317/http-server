@@ -21,7 +21,7 @@ def main():
     request_header=data_list[1]
     header_dict={}
     items=re.findall(r'(\w+): (.*?)(\r\n|$)',request_header)
-    print(items)
+    print('item=',items)
     for (key,value) in items:
         header_dict[key]=value
     # if target_path!='/' and target_path[:5]!=r'/echo':

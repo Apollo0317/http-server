@@ -37,7 +37,7 @@ def main():
     if target=='/user-agent':
         code=200
         status_describe='OK'
-        content=request_header['User-Agent']
+        content=header_dict['User-Agent']
 
     #start forming response
     response=b''

@@ -2,9 +2,9 @@ import socket  # noqa: F401
 import re
 
 def main():
-
-    status_describe='OK'
-    code=200
+    content=''
+    status_describe='Not Found'
+    code=404
     bufsize=1024
     Content_Type:str='text/plain'
     Content_length:int=0
@@ -15,12 +15,29 @@ def main():
     print('request=',request)
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split(' ')
-    target_path=request_line[1]
-    Content_length=len(target_path)-6
+    target=request_line[1]
+    Content_length=len(target)-6
+    #parsing request header
     request_header=data_list[1]
-    if target_path!='/' and target_path[:5]!=r'/echo':
-        code=404
-        status_describe='Not Found'
+    header_dict={}
+    items=re.findall(r'(\w+): (.*?)(\r\n|$)',request_header)
+    for key,value in items:
+        header_dict[key]=value
+    # if target_path!='/' and target_path[:5]!=r'/echo':
+    #     code=404
+    #     status_describe='Not Found'
+    if target=='/':
+        code=200
+        status_describe='OK'
+    if target=='/echo':
+        code=200
+        status_describe='OK'
+        content=target[:6]
+    if target=='/user-agent':
+        code=200
+        status_describe='OK'
+        content=request_header['User-Agent']
+
     #start forming response
     response=b''
     #form response status
@@ -28,7 +45,7 @@ def main():
     #form response header
     headers=bytes(f'Content-Type: text/plain\r\nContent-Length:{Content_length}\r\n\r\n',encoding='utf-8')
     #form response body
-    body=bytes(f'{target_path[6:]}',encoding='utf-8')
+    body=bytes(f'{content}',encoding='utf-8')
     response+=status
     response+=headers
     response+=body

@@ -20,6 +20,7 @@ def main():
     #parsing request header
     request_header=''
     crif=[index for index in range(len(request)) if request[index:index+4]=='\r\n' ]
+    print('crif=',crif)
     request_header=request[crif[0]+3:crif[:-1]]
     header_dict={}
     items=re.findall(r'(\w+): (.*?)\r\n',request_header+'\r\n')

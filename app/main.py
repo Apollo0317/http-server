@@ -19,7 +19,7 @@ def main():
     Content_length=len(target)-6
     #parsing request header
     request_header=''
-    crif=[index for index in len(request) if request[index:index+4]=='\r\n' ]
+    crif=[index for index in range(len(request)) if request[index:index+4]=='\r\n' ]
     request_header=request[crif[0]+3:crif[:-1]]
     header_dict={}
     items=re.findall(r'(\w+): (.*?)\r\n',request_header+'\r\n')

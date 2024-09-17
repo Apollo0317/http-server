@@ -20,7 +20,7 @@ def main():
     #parsing request header
     request_header=data_list[1]
     header_dict={}
-    items=re.findall(r'(\w+): (.*?)(\r\n|$)',request_header)
+    items=re.findall(r'(\w+): (.*?)[\r\n|$]',request_header)
     print('item=',items)
     for (key,value) in items:
         header_dict[key]=value

@@ -14,7 +14,7 @@ def main():
     request=client_socket.recv(bufsize).decode()
     print('request=',request)
     data_list:list[str]=request.split('\r\n')
-    request_line=data_list[0].split('')
+    request_line=data_list[0].split(' ')
     target_path=request_line[1]
     Content_length=len(target_path)-6
     request_header=data_list[1]

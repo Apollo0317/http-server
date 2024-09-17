@@ -12,6 +12,7 @@ def main():
     client_socket,client_addr=server_socket.accept() # wait for client
     #parsing request
     request=client_socket.recv(bufsize).decode()
+    print('request=',request)
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split('')
     target_path=request_line[1]

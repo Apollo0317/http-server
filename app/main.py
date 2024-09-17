@@ -2,6 +2,7 @@ import socket  # noqa: F401
 import re
 
 def main():
+    status_describe='OK'
     code=200
     bufsize=1024
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
@@ -12,8 +13,9 @@ def main():
     target_path=data_list[0].split(' ')[1]
     if target_path!='/':
         code=404
+        status_describe='Not Found'
     response=b''
-    status=bytes('HTTP/1.1 {} OK\r\n'.format(code),encoding='utf-8')
+    status=bytes('HTTP/1.1 {} {}\r\n'.format(code,status_describe),encoding='utf-8')
     headers=b'\r\n'
     body=b''
     response+=status

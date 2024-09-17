@@ -10,7 +10,7 @@ def main():
     request=client_socket.recv(bufsize).decode()
     data_list:list[str]=request.split('\r\n')
     target_path=data_list[0].split(' ')[1]
-    if target_path=='/index.html':
+    if target_path!='/':
         code=404
     response=b''
     status=bytes('HTTP/1.1 {} OK\r\n'.format(code),encoding='utf-8')

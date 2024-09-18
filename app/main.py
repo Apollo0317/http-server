@@ -94,6 +94,7 @@ def handle_request(client_socket:socket.socket):
     
     if Content_Encoding=='gzip':
         content=gzip.compress(data=content)
+        print('content=',content)
     Content_length=len(content)
     #start forming response
     response=b''

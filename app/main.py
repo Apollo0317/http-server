@@ -43,6 +43,7 @@ def handle_request(client_socket:socket.socket):
             f.write(content)
         Content_Type='application/octet-stream'
         Content_length=len(bytes(content,encoding='utf-8'))
+        print('content=',content)
     else:
         code=404
         status_describe='Not Found'

@@ -33,7 +33,9 @@ def handle_request(client_socket:socket.socket):
         code=201
         status_describe='Created'
         filename=target[7:]
+        print('here1')
         path=sys.argv[2:]
+        print('here2')
         print(path+filename)
         try:
             with open(file=path+filename,mode='w',encoding='utf-8') as f:

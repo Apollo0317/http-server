@@ -27,6 +27,7 @@ def handle_request(client_socket:socket.socket):
     print(f'target={target},method={method},path={sys.argv[2]}')
     if method=='POST':
         request_body=data_list[-1]
+        print(f'request_body={request_body}')
         Content_Type='application/octet-stream'
         Content_length=len(bytes(request_body,encoding='utf-8'))
         code=201

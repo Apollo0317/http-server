@@ -54,6 +54,9 @@ def handle_request(client_socket:socket.socket):
             Content_Type='application/octet-stream'
             Content_length=len(bytes(content,encoding='utf-8'))
             print(f'content={content}\nfilename={filename}')
+        else:
+            code=404
+            status_describe='Not Found'
 
     else:
         code=404

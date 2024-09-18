@@ -43,7 +43,9 @@ def handle_request(client_socket:socket.socket):
         path=sys.argv[2]
         filename=target[7:]
         try: 
-            with open(file=path+filename,encoding='utf-8') as f:
+            filepath=path+filename
+            print(filepath)
+            with open(file=filepath,encoding='utf-8') as f:
                 content=f.read()
         except Exception as e:
             print(e)

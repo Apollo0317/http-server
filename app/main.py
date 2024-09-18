@@ -38,9 +38,10 @@ def handle_request(client_socket:socket.socket):
         content=request_header['User-Agent']
         Content_length=len(content)
     elif '/files' in target:
+        path='/tmp/data/codecrafters.io/http-server-tester/'
         filename=target[7:]
         try: 
-            with open(file=filename,encoding='utf-8') as f:
+            with open(file=path+filename,encoding='utf-8') as f:
                 f.write(content)
         except Exception as e:
             print(e)

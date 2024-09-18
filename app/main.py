@@ -45,18 +45,22 @@ def handle_request(client_socket:socket.socket):
         return
 
     elif target=='/':
+        print('\ get now')
         code=200
         status_describe='OK'
+
     elif target[:5]=='/echo':
         code=200
         status_describe='OK'
         content=target[6:]
         Content_length=len(content)
+
     elif target=='/user-agent':
         code=200
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
+
     elif '/files' in target:
         code=200
         status_describe='OK'
@@ -98,7 +102,7 @@ def handle_request(client_socket:socket.socket):
     response+=status
     response+=headers
     response+=body
-    print(response)
+    print('response=',response)
     client_socket.send(response)
     client_socket.close()
 

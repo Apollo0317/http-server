@@ -42,7 +42,7 @@ def handle_request(client_socket:socket.socket):
         filename=target[7:]
         try: 
             with open(file=path+filename,encoding='utf-8') as f:
-                f.read(content)
+                content=f.read()
         except Exception as e:
             print(e)
         Content_Type='application/octet-stream'

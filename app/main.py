@@ -1,7 +1,7 @@
 import socket  # noqa: F401
 import re
 from concurrent.futures import ThreadPoolExecutor
-
+import os
 
 
 def handle_request(client_socket:socket.socket):
@@ -37,6 +37,12 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
+    elif target[:6]=='/files':
+        filename=target[7:]
+        with open(file=filename,encoding='utf-8') as f:
+            f.write(content)
+        Content_Type='application/octet-stream'
+        Content_length=len(bytes(content,encoding='utf-8'))
     else:
         code=404
         status_describe='Not Found'
@@ -46,7 +52,7 @@ def handle_request(client_socket:socket.socket):
     #form response status
     status=bytes('HTTP/1.1 {} {}\r\n'.format(code,status_describe),encoding='utf-8')
     #form response header
-    headers=bytes(f'Content-Type: text/plain\r\nContent-Length:{Content_length}\r\n\r\n',encoding='utf-8')
+    headers=bytes(f'Content-Type: {Content_Type}\r\nContent-Length:{Content_length}\r\n\r\n',encoding='utf-8')
     #form response body
     body=bytes(f'{content}',encoding='utf-8')
     response+=status

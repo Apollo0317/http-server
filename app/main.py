@@ -13,7 +13,6 @@ def handle_request(client_socket:socket.socket):
     Content_length:int=0
     #parsing request
     request=client_socket.recv(bufsize).decode()
-    print('request=',request)
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split(' ')
     target=request_line[1]
@@ -43,7 +42,7 @@ def handle_request(client_socket:socket.socket):
             f.write(content)
         Content_Type='application/octet-stream'
         Content_length=len(bytes(content,encoding='utf-8'))
-        print('content=',content)
+        print(f'content={content}\nfilename={filename}')
     else:
         code=404
         status_describe='Not Found'

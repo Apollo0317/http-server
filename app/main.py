@@ -88,6 +88,7 @@ def handle_request(client_socket:socket.socket):
     response+=status
     response+=headers
     response+=body
+    print(response)
     client_socket.sendall(response)
     client_socket.close()
     

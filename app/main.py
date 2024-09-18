@@ -22,6 +22,7 @@ def handle_request(client_socket:socket.socket):
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value
+    target=target.strip()
     print('target=',target)
     if target=='/':
         code=200

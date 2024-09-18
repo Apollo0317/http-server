@@ -104,6 +104,5 @@ def main():
             print(f'ip_addr={ip}')
             executor.submit(handle_request,client_socket)
 
-
 if __name__ == "__main__":
     main()

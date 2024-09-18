@@ -22,6 +22,7 @@ def handle_request(client_socket:socket.socket):
     items=re.findall(r'\n(.*?): (.*?)\r',request)
     print('item=',items)
     for (key,value) in items:
+        print(f'{key}:{value}')
         request_header[key]=value
     #target=target.strip()
     print(f'target={target},method={method},path={sys.argv[2]}')
@@ -44,7 +45,7 @@ def handle_request(client_socket:socket.socket):
         client_socket.close()
         return
 
-    elif target==r'/':
+    elif target=='/':
         print('\\ get now')
         code=200
         status_describe='OK'

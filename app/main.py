@@ -15,6 +15,7 @@ def handle_request(client_socket:socket.socket):
     request=client_socket.recv(bufsize).decode()
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split(' ')
+    method=request_line[0]
     target=request_line[1]
     #parsing request header
     request_header={}
@@ -24,7 +25,17 @@ def handle_request(client_socket:socket.socket):
         request_header[key]=value
     target=target.strip()
     print('target=',target)
-    if target=='/':
+    if method=='POST':
+        request_body=data_list[-1]
+        Content_Type='application/octet-stream'
+        Content_length=len(bytes(request_body,encoding='utf-8'))
+        code=201
+        status_describe='Created'
+        filename=target[7:]
+        path=sys.argv[2:]
+        with open(file=path+filename,mode='w',encoding='utf-8') as f:
+            f.write(request_body)
+    elif target=='/':
         code=200
         status_describe='OK'
     elif target[:5]=='/echo':

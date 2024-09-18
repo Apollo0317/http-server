@@ -4,14 +4,13 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 
-def handle_request():
+def handle_request(server_socket):
     content=''
     status_describe='Not Found'
     code=404
     bufsize=1024
     Content_Type:str='text/plain'
     Content_length:int=0
-    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     client_socket,client_addr=server_socket.accept() # wait for client
     print(f'new connecton:addr={client_addr}')
     #parsing request
@@ -58,8 +57,9 @@ def handle_request():
     client_socket.sendall(response)
 
 def main():
+    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     with ThreadPoolExecutor(max_workers=5) as executor:
-        executor.submit(handle_request)
+        executor.submit(handle_request,server_socket)
 
 
 if __name__ == "__main__":

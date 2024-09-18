@@ -2,7 +2,7 @@ import socket  # noqa: F401
 import re
 from concurrent.futures import ThreadPoolExecutor
 import os
-
+import sys
 
 def handle_request(client_socket:socket.socket):
     content=''
@@ -38,7 +38,7 @@ def handle_request(client_socket:socket.socket):
         content=request_header['User-Agent']
         Content_length=len(content)
     elif '/files' in target:
-        path='/tmp/data/codecrafters.io/http-server-tester/'
+        path=sys.argv[2]
         filename=target[7:]
         try: 
             with open(file=path+filename,encoding='utf-8') as f:

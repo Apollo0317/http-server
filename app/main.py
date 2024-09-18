@@ -6,6 +6,7 @@ import sys
 
 def handle_request(client_socket:socket.socket):
     content=''
+    Content_Encoding=''
     status_describe='Not Found'
     code=404
     bufsize=1024
@@ -22,10 +23,7 @@ def handle_request(client_socket:socket.socket):
     items=re.findall(r'\n(.*?): (.*?)\r',request)
     print('item=',items)
     for (key,value) in items:
-        print(f'{key}:{value}')
         request_header[key]=value
-    #target=target.strip()
-    #print(f'target={target},method={method},path={sys.argv[2]}')
 
     if method=='POST':
         request_body=data_list[-1]
@@ -86,7 +84,10 @@ def handle_request(client_socket:socket.socket):
     else:
         code=404
         status_describe='Not Found'
-        
+    
+    if request_header.get('Accept-Encoding')=='gzip':
+        Content_Encoding='gzip'
+
     #start forming response
     response=b''
     #form response status
@@ -95,6 +96,8 @@ def handle_request(client_socket:socket.socket):
     headers=''
     headers+=f'Content-Type: {Content_Type}\r\n'
     headers+=f'Content-Length: {Content_length}\r\n\r\n'
+    if Content_Encoding:
+        headers+=f'Content-Encoding:{Content_Encoding}'
     headers=bytes(headers,encoding='utf-8')
     #headers=bytes(f'Content-Type: {Content_Type}\r\nContent-Length: {Content_length}\r\n\r\n',encoding='utf-8')
 

@@ -12,7 +12,7 @@ def handle_request(client_socket:socket.socket):
     Content_Type:str='text/plain'
     Content_length:int=0
     #parsing request
-    request=client_socket.recv(bufsize).decode().replace('\0','')
+    request=client_socket.recv(bufsize).decode()
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split(' ')
     method=request_line[0]
@@ -44,8 +44,8 @@ def handle_request(client_socket:socket.socket):
         client_socket.close()
         return
 
-    elif target=='/':
-        print('\ get now')
+    elif target==r'/':
+        print('\\ get now')
         code=200
         status_describe='OK'
 

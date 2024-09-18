@@ -93,7 +93,6 @@ def handle_request(client_socket:socket.socket):
     client_socket.sendall(response)
     client_socket.close()
 
-
 def main():
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     server_socket.listen(5)

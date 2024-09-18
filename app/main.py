@@ -39,7 +39,7 @@ def handle_request(client_socket:socket.socket):
                 f.write(request_body)
         except Exception as e:
             print(e)
-            
+
     elif target=='/':
         code=200
         status_describe='OK'
@@ -83,7 +83,7 @@ def handle_request(client_socket:socket.socket):
     #form response status
     status=bytes('HTTP/1.1 {} {}\r\n'.format(code,status_describe),encoding='utf-8')
     #form response header
-    headers=bytes(f'Content-Type:{Content_Type}\r\nContent-Length:{Content_length}\r\n\r\n',encoding='utf-8')
+    headers=bytes(f'Content-Type:{Content_Type}\r\n Content-Length:{Content_length}\r\n\r\n',encoding='utf-8')
     #form response body
     body=bytes(f'{content}',encoding='utf-8')
     response+=status

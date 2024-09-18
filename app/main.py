@@ -33,6 +33,7 @@ def handle_request(client_socket:socket.socket):
         status_describe='Created'
         filename=target[7:]
         path=sys.argv[2:]
+        print(path+filename)
         with open(file=path+filename,mode='w',encoding='utf-8') as f:
             f.write(request_body)
     elif target=='/':

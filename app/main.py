@@ -114,9 +114,10 @@ def handle_request(client_socket:socket.socket):
     #headers=bytes(f'Content-Type: {Content_Type}\r\nContent-Length: {Content_length}\r\n\r\n',encoding='utf-8')
 
     #form response body
-    #if not Content_Encoding:
-    body=bytes(f'{content}',encoding='utf-8')
-    #body=content
+    if not Content_Encoding:
+        body=bytes(f'{content}',encoding='utf-8')
+    else:
+        body=content
     response+=status
     response+=headers
     response+=body

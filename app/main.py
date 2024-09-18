@@ -42,6 +42,7 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         path=sys.argv[2]
         filename=target[7:]
+        print(os.listdir(path))
         if filename in os.listdir(path=path):
             try: 
                 filepath=path+filename

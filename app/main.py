@@ -24,7 +24,7 @@ def handle_request(client_socket:socket.socket):
     for (key,value) in items:
         request_header[key]=value
     target=target.strip()
-    print('target=',target)
+    print(f'target={target},method={method},path={sys.argv[2]}')
     if method=='POST':
         request_body=data_list[-1]
         Content_Type='application/octet-stream'

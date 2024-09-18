@@ -39,6 +39,7 @@ def handle_request(client_socket:socket.socket):
                 f.write(request_body)
         except Exception as e:
             print(e)
+            
     elif target=='/':
         code=200
         status_describe='OK'

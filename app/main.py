@@ -37,7 +37,7 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
-    elif '/files' in target:
+    elif 'files' in target:
         filename=target[7:]
         with open(file=filename,encoding='utf-8') as f:
             f.write(content)
@@ -70,7 +70,7 @@ def main():
         while True:
             client_socket,client_addr=server_socket.accept() # wait for client
             ip=client_addr[0]+':'+str(client_addr[1])
-            print(f'new connecton:addr={ip}')
+            print(f'ip_addr={ip}')
             executor.submit(handle_request,client_socket)
 
 

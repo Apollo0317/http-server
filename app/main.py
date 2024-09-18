@@ -60,6 +60,7 @@ def handle_request(client_socket:socket.socket):
         code=200
         status_describe='OK'
         content=target[6:]
+        print('content=',content)
 
     elif target=='/user-agent':
         code=200

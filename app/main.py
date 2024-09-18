@@ -37,10 +37,13 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
-    elif 'files' in target:
+    elif '/files' in target:
         filename=target[7:]
-        with open(file=filename,encoding='utf-8') as f:
-            f.write(content)
+        try: 
+            with open(file=filename,encoding='utf-8') as f:
+                f.write(content)
+        except Exception as e:
+            print(e)
         Content_Type='application/octet-stream'
         Content_length=len(bytes(content,encoding='utf-8'))
         print(f'content={content}\nfilename={filename}')

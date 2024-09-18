@@ -19,7 +19,7 @@ def main():
     Content_length=len(target)-6
     #parsing request header
     request_header={}
-    items=re.findall(r'\r\n(.*?): (.*?)\r\n',request)
+    items=re.findall(r'\n(.*?): (.*?)\r',request)
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value

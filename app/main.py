@@ -93,8 +93,11 @@ def handle_request(client_socket:socket.socket):
         status_describe='Not Found'
     
     if Content_Encoding=='gzip':
-        content=gzip.compress(data=content)
-        print('content=',content)
+            try:
+                content=gzip.compress(data=bytes(content,encoding='utf-8'))
+                print('content=',content)
+            except:
+                pass
     Content_length=len(content)
     #start forming response
     response=b''

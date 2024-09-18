@@ -23,7 +23,7 @@ def handle_request(client_socket:socket.socket):
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value
-    target=target.strip()
+    #target=target.strip()
     print(f'target={target},method={method},path={sys.argv[2]}')
 
     if method=='POST':

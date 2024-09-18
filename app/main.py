@@ -38,6 +38,8 @@ def handle_request(client_socket:socket.socket):
         content=request_header['User-Agent']
         Content_length=len(content)
     elif '/files' in target:
+        code=200
+        status_describe='OK'
         path=sys.argv[2]
         filename=target[7:]
         try: 

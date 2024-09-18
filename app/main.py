@@ -22,23 +22,24 @@ def main():
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value
-    # if target_path!='/' and target_path[:5]!=r'/echo':
-    #     code=404
-    #     status_describe='Not Found'
+
     if target=='/':
         code=200
         status_describe='OK'
-    if target[:5]=='/echo':
+    elif target[:5]=='/echo':
         code=200
         status_describe='OK'
         content=target[6:]
         Content_length=len(content)
-    if target=='/user-agent':
+    elif target=='/user-agent':
         code=200
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
-
+    else:
+        code=404
+        status_describe='Not Found'
+        
     #start forming response
     response=b''
     #form response status

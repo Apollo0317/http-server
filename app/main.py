@@ -2,15 +2,16 @@ import socket  # noqa: F401
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-content=''
-status_describe='Not Found'
-code=404
-bufsize=1024
-Content_Type:str='text/plain'
-Content_length:int=0
-server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
+
 
 def handle_request():
+    content=''
+    status_describe='Not Found'
+    code=404
+    bufsize=1024
+    Content_Type:str='text/plain'
+    Content_length:int=0
+    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     client_socket,client_addr=server_socket.accept() # wait for client
     print(f'new connecton:addr={client_addr}')
     #parsing request

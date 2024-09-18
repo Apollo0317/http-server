@@ -3,6 +3,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 import os
 import sys
+import gzip
 
 def handle_request(client_socket:socket.socket):
     content=''
@@ -24,6 +25,13 @@ def handle_request(client_socket:socket.socket):
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value
+
+    # depression detection
+    try:
+        if 'gzip' in request_header.get('Accept-Encoding'):
+            Content_Encoding='gzip'
+    except Exception as e:
+        print(e)
 
     if method=='POST':
         request_body=data_list[-1]
@@ -52,13 +60,12 @@ def handle_request(client_socket:socket.socket):
         code=200
         status_describe='OK'
         content=target[6:]
-        Content_length=len(content)
 
     elif target=='/user-agent':
         code=200
         status_describe='OK'
         content=request_header['User-Agent']
-        Content_length=len(content)
+        #Content_length=len(content)
 
     elif '/files' in target:
         code=200
@@ -75,8 +82,7 @@ def handle_request(client_socket:socket.socket):
             except Exception as e:
                 print(e)
             Content_Type='application/octet-stream'
-            Content_length=len(bytes(content,encoding='utf-8'))
-            print(f'content={content}\nfilename={filename}')
+            #Content_length=len(bytes(content,encoding='utf-8'))
         else:
             code=404
             status_describe='Not Found'
@@ -85,11 +91,8 @@ def handle_request(client_socket:socket.socket):
         code=404
         status_describe='Not Found'
     
-    try:
-        if 'gzip' in request_header.get('Accept-Encoding'):
-            Content_Encoding='gzip'
-    except Exception as e:
-        print(e)
+    if Content_Encoding=='gzip':
+        content=gzip.compress(data=content)
 
     #start forming response
     response=b''

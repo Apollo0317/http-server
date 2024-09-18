@@ -12,6 +12,7 @@ server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
 
 def handle_request():
     client_socket,client_addr=server_socket.accept() # wait for client
+    print(f'new connecton:addr={client_addr}')
     #parsing request
     request=client_socket.recv(bufsize).decode()
     print('request=',request)

@@ -85,7 +85,7 @@ def handle_request(client_socket:socket.socket):
         code=404
         status_describe='Not Found'
     
-    if request_header.get('Accept-Encoding')=='gzip':
+    if 'gzip' in request_header.get('Accept-Encoding'):
         Content_Encoding='gzip'
 
     #start forming response

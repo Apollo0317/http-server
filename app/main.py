@@ -1,14 +1,16 @@
 import socket  # noqa: F401
 import re
+from concurrent.futures import ThreadPoolExecutor
 
-def main():
-    content=''
-    status_describe='Not Found'
-    code=404
-    bufsize=1024
-    Content_Type:str='text/plain'
-    Content_length:int=0
-    server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
+content=''
+status_describe='Not Found'
+code=404
+bufsize=1024
+Content_Type:str='text/plain'
+Content_length:int=0
+server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
+
+def handle_request():
     client_socket,client_addr=server_socket.accept() # wait for client
     #parsing request
     request=client_socket.recv(bufsize).decode()
@@ -52,6 +54,11 @@ def main():
     response+=headers
     response+=body
     client_socket.sendall(response)
+
+def main():
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        executor.submit(handle_request)
+
 
 if __name__ == "__main__":
     main()

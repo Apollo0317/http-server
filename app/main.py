@@ -16,7 +16,6 @@ def main():
     data_list:list[str]=request.split('\r\n')
     request_line=data_list[0].split(' ')
     target=request_line[1]
-    Content_length=len(target)-6
     #parsing request header
     request_header={}
     items=re.findall(r'\n(.*?): (.*?)\r',request)
@@ -29,14 +28,16 @@ def main():
     if target=='/':
         code=200
         status_describe='OK'
-    if target=='/echo':
+    if target[:5]=='/echo':
         code=200
         status_describe='OK'
-        content=target[:6]
+        content=target[6:]
+        Content_length=len(content)
     if target=='/user-agent':
         code=200
         status_describe='OK'
         content=request_header['User-Agent']
+        Content_length=len(content)
 
     #start forming response
     response=b''

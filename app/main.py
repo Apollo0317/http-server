@@ -42,16 +42,18 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         path=sys.argv[2]
         filename=target[7:]
-        try: 
-            filepath=path+filename
-            print(filepath)
-            with open(file=filepath,encoding='utf-8') as f:
-                content=f.read()
-        except Exception as e:
-            print(e)
-        Content_Type='application/octet-stream'
-        Content_length=len(bytes(content,encoding='utf-8'))
-        print(f'content={content}\nfilename={filename}')
+        if filename in os.listdir(path=path):
+            try: 
+                filepath=path+filename
+                print(filepath)
+                with open(file=filepath,encoding='utf-8') as f:
+                    content=f.read()
+            except Exception as e:
+                print(e)
+            Content_Type='application/octet-stream'
+            Content_length=len(bytes(content,encoding='utf-8'))
+            print(f'content={content}\nfilename={filename}')
+
     else:
         code=404
         status_describe='Not Found'

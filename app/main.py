@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 
-def handle_request(client_socket):
+def handle_request(client_socket:socket.socket):
     content=''
     status_describe='Not Found'
     code=404
@@ -53,6 +53,8 @@ def handle_request(client_socket):
     response+=headers
     response+=body
     client_socket.sendall(response)
+    client_socket.close()
+    
 
 def main():
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)

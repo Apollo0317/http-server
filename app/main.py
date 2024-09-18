@@ -39,7 +39,7 @@ def handle_request(client_socket:socket.socket):
                 f.write(request_body)
         except Exception as e:
             print(e)
-        client_socket.send("HTTP/1.1 201 OK\r\n\r\n".encode())
+        client_socket.send("HTTP/1.1 201 Created\r\n\r\n".encode())
         client_socket.close()
         return
 

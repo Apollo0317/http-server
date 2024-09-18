@@ -119,7 +119,7 @@ def handle_request(client_socket:socket.socket):
     response+=headers
     response+=body
     print('response=',response)
-    client_socket.send(response)
+    client_socket.sendall(response)
     client_socket.close()
 
 def main():

@@ -25,6 +25,7 @@ def handle_request(client_socket:socket.socket):
         request_header[key]=value
     target=target.strip()
     print(f'target={target},method={method},path={sys.argv[2]}')
+
     if method=='POST':
         request_body=data_list[-1]
         Content_Type='application/octet-stream'
@@ -98,7 +99,7 @@ def handle_request(client_socket:socket.socket):
     response+=headers
     response+=body
     print(response)
-    client_socket.sendall(response)
+    client_socket.send(response)
     client_socket.close()
 
 def main():

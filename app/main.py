@@ -18,16 +18,11 @@ def main():
     target=request_line[1]
     Content_length=len(target)-6
     #parsing request header
-    request_header=''
-    crif=[index for index in range(len(request)) if request[index:index+4]=='\r\n' ]
-    print('crif=',crif)
-    request_header=request[crif[0]+4:crif[-1]]
-    print('request_header=',request_header)
-    header_dict={}
-    items=re.findall(r'(\w+): (.*?)\r\n',request_header+'\r\n')
+    request_header={}
+    items=re.findall(r'(\w+): (.*?)\r\n',request)
     print('item=',items)
     for (key,value) in items:
-        header_dict[key]=value
+        request_header[key]=value
     # if target_path!='/' and target_path[:5]!=r'/echo':
     #     code=404
     #     status_describe='Not Found'
@@ -41,7 +36,7 @@ def main():
     if target=='/user-agent':
         code=200
         status_describe='OK'
-        content=header_dict['User-Agent']
+        content=request_header['User-Agent']
 
     #start forming response
     response=b''

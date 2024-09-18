@@ -22,7 +22,7 @@ def handle_request(client_socket:socket.socket):
     print('item=',items)
     for (key,value) in items:
         request_header[key]=value
-
+    print('target=',target)
     if target=='/':
         code=200
         status_describe='OK'
@@ -36,7 +36,7 @@ def handle_request(client_socket:socket.socket):
         status_describe='OK'
         content=request_header['User-Agent']
         Content_length=len(content)
-    elif target[:6]=='/files':
+    elif target[:6]==r'/files':
         filename=target[7:]
         with open(file=filename,encoding='utf-8') as f:
             f.write(content)

@@ -95,9 +95,10 @@ def handle_request(client_socket:socket.socket):
     #form response header
     headers=''
     headers+=f'Content-Type: {Content_Type}\r\n'
-    headers+=f'Content-Length: {Content_length}\r\n\r\n'
+    headers+=f'Content-Length: {Content_length}\r\n'
     if Content_Encoding:
-        headers+=f'Content-Encoding:{Content_Encoding}'
+        headers+=f'Content-Encoding:{Content_Encoding}\r\n'
+    headers+='\r\n'
     headers=bytes(headers,encoding='utf-8')
     #headers=bytes(f'Content-Type: {Content_Type}\r\nContent-Length: {Content_length}\r\n\r\n',encoding='utf-8')
 

@@ -94,7 +94,7 @@ def handle_request(client_socket:socket.socket):
     
     if Content_Encoding=='gzip':
             try:
-                content=gzip.compress(data=content.encode('utf-8'))
+                content=str(gzip.compress(data=content.encode('utf-8')))
                 d_content=gzip.decompress(data=content)
                 print(f'content={content},d-content={d_content}')
             except:
